@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    // 不可有未使用引入
+    "noUnusedLocals": true,
+    // 是否启用ES装饰器
+    "experimentalDecorators": true,
+    // 给源码里的装饰器声明加上设计类型元数据
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    // 转化esm，使esm可是引入commonjs
+    "esModuleInterop": true,
+    // 在表达式和声明上有隐含的any类型时报错
+    "noImplicitAny": true,
+    "lib": ["esnext", "dom"],
+    "typeRoots": [
+      "node_modules/@types",
+      "typings"
+    ],
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+  
