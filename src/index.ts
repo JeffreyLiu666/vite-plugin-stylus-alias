@@ -35,29 +35,23 @@ export function transform(code: string, id: string, aliasConfig: Alias[] = []): 
     if (!oldImports) return code
 
     const newImports = oldImports.map(oldImport => {
-        for (const alias of aliasConfig) {
-            const { find, replacement } = alias
-
-            // TODO: 适配正则类型
-            if (find instanceof RegExp) continue
-
-            const aliasReg = new RegExp(`['"](~?${ find }/[^'"]*)['"]`)
-            const aliasPaths = aliasReg.exec(oldImport)
-            if (!aliasPaths) continue
-            // 获取设置了别名的import字符串
-            const aliasPath = aliasPaths[1]
-            if (!aliasPath) continue
-
-            let len: number = find.length
-            // 可不设置[~]
-            if (aliasPath[0] === '~') len++
-            const absolutePath = replacement + aliasPath.slice(len)
+        const pathReg = new RegExp(`['"](~?[^'"]*)['"]`)
+        const aliasPaths = pathReg.exec(oldImport)
+        if (!aliasPaths) return oldImport
+        // 遍历别名配置进行转换
+        for (const { find, replacement } of aliasConfig) {
+            let aliasPath = aliasPaths[1]
+            // 处理路径时需要不带(~)符号
+            if (aliasPath.startsWith('~')) aliasPath = aliasPath.slice(1)
+            const hasAlias = typeof find === 'string' ? new RegExp(`^~?${ find }`).test(aliasPath) : find.test(aliasPath)
+            if (!hasAlias) continue
+            const absolutePath = aliasPath.replace(find, replacement)
             // relative处理文件的路径需要向上一层
             const curFilePath = path.resolve(filename, '../')
             // 解析引入文件相对当前样式文件的路径
             let newImportPath = path.relative(curFilePath, absolutePath)
             if (newImportPath[0] !== '.') newImportPath = './' + newImportPath
-            const newImport = oldImport.replace(aliasPath, newImportPath)
+            const newImport = oldImport.replace(aliasPaths[1], newImportPath)
             return newImport
         }
         return oldImport

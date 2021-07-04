@@ -38,4 +38,17 @@ describe('vite-stylus-alisa', () => {
             expect(code).toBe(after)
         })
     })
+
+    describe('reg-alias', () => {
+        const alias: Alias[] = [
+            { find: /^@/, replacement: path.resolve(__dirname, 'src') },
+            { find: /^style/, replacement: path.resolve(__dirname, 'src/style') }
+        ]
+
+        test('vue-import', () => {
+            const code = transform(imports, vueId, alias).replace(/\\/g, '/')
+
+            expect(code).toBe(after)
+        })
+    })
 })

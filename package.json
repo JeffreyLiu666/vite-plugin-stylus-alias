@@ -1,13 +1,19 @@
 {
-  "name": "stylus-alias",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "vite-plugin-stylus-alias",
+  "version": "1.1.0",
+  "main": "lib/index.js",
   "author": "JeffreyLiu666",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && tsc -p .",
+    "build": "rimraf lib && tsc -p .",
     "test": "jest"
   },
+  "files": [
+    "src",
+    "dist",
+    "CHANGELOG.md",
+    "README.md"
+  ],
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/node": "^15.12.1",
