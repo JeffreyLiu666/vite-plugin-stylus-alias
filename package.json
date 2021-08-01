@@ -8,6 +8,14 @@
     "build": "rimraf lib && tsc -p .",
     "test": "jest"
   },
+  "bugs": {
+      "url": "https://github.com/JeffreyLiu666/vite-plugin-stylus-alias/issues"
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/JeffreyLiu666/vite-plugin-stylus-alias.git"
+  },
+  "homepage": "https://github.com/JeffreyLiu666/vite-plugin-stylus-alias",
   "files": [
     "src",
     "dist",
