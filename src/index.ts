@@ -76,7 +76,10 @@ export default function stylusAlias(): Plugin {
             aliasConfig = viteConfig.resolve.alias || []
         },
         transform(code: string, id: string) {
-            return { code: transform(code, id, aliasConfig) }
+            return { 
+                code: transform(code, id, aliasConfig),
+                map: null
+            }
         }
     }
 }
