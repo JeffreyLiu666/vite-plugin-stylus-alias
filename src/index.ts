@@ -26,7 +26,7 @@ export function transform(code: string, id: string, aliasConfig: Alias[] = []): 
     const extname = path.extname(filename)
     if (
         (query.vue && query['lang.stylus'] !== '') ||
-        (!query.vue && (extname !== '.styl' && extname !== 'stylus'))
+        (!query.vue && (extname !== '.styl' && extname !== '.stylus'))
     ) return code
 
     // 获取所有import字符串
