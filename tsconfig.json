@@ -5,6 +5,8 @@
     "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
+    // 创建 .d.ts 类型声明
+    "declaration": true,
     "strict": true,
     // 不可有未使用引入
     "noUnusedLocals": true,
